@@ -62,8 +62,8 @@ func _physics_process(delta: float) -> void:
 	_handle_shoot()
 
 func _handle_input(delta: float) -> void:
-	is_crawling = Input.is_action_pressed("ui_down") and Input.get_axis("ui_left", "ui_right") != 0.0
-	var input_x = Input.get_axis("ui_left", "ui_right")
+	is_crawling = MobileInput.is_crawling()
+	var input_x = MobileInput.get_move_x()
 
 	if input_x != 0.0:
 		velocity.x = move_toward(velocity.x, input_x * SPEED, SPEED * 6.0 * delta)
@@ -72,9 +72,9 @@ func _handle_input(delta: float) -> void:
 
 	if on_floor:
 		fuel = min(max_fuel, fuel + FUEL_REGEN * delta)
-		if Input.is_action_just_pressed("ui_accept"):
+		if MobileInput.consume_jump_just():
 			velocity.y = JUMP_FORCE
-	elif Input.is_action_pressed("ui_accept") and fuel > 0.0:
+	elif MobileInput.is_jump_held() and fuel > 0.0:
 		velocity.y -= JET_ACCEL * delta
 		fuel = max(0.0, fuel - FUEL_DRAIN * delta)
 
@@ -137,19 +137,19 @@ func _ceil_overlap(hh: float) -> bool:
 func _update_aim() -> void:
 	if gun_pivot == null:
 		return
-	var mouse_pos = get_global_mouse_position()
-	var to_mouse = mouse_pos - global_position
-	gun_pivot.rotation = to_mouse.angle()
+	var aim_pos = MobileInput.get_aim_world_pos(get_viewport())
+	var to_aim = aim_pos - global_position
+	gun_pivot.rotation = to_aim.angle()
 	if body_polygon:
-		body_polygon.scale.x = -1.0 if to_mouse.x < 0 else 1.0
+		body_polygon.scale.x = -1.0 if to_aim.x < 0 else 1.0
 
 func _handle_jet_particles() -> void:
 	if jet_particles == null:
 		return
-	jet_particles.visible = (not on_floor) and Input.is_action_pressed("ui_accept") and fuel > 0.0
+	jet_particles.visible = (not on_floor) and MobileInput.is_jump_held() and fuel > 0.0
 
 func _handle_rope_input() -> void:
-	if Input.is_action_just_pressed("rope"):
+	if MobileInput.consume_rope_just():
 		if rope_active:
 			_detach_rope()
 		else:
@@ -158,8 +158,8 @@ func _handle_rope_input() -> void:
 func _try_cast_rope() -> void:
 	if terrain_ref == null:
 		return
-	var mouse_pos = get_global_mouse_position()
-	var dir = (mouse_pos - global_position).normalized()
+	var aim_pos = MobileInput.get_aim_world_pos(get_viewport())
+	var dir = (aim_pos - global_position).normalized()
 	var step = float(Terrain.TILE_PX)
 	for i in range(1, 26):
 		var check_pos = global_position + dir * step * i
@@ -175,19 +175,20 @@ func _detach_rope() -> void:
 	velocity *= 1.2
 
 func _handle_shoot() -> void:
-	for i in min(5, weapons.size()):
-		if Input.is_key_pressed(KEY_1 + i):
-			if weapon_index != i:
-				weapon_index = i
-				weapon_changed.emit(weapons[weapon_index].name)
-			break
-	if Input.is_action_just_pressed("ui_page_up"):
+	if not MobileInput.is_mobile:
+		for i in min(5, weapons.size()):
+			if Input.is_key_pressed(KEY_1 + i):
+				if weapon_index != i:
+					weapon_index = i
+					weapon_changed.emit(weapons[weapon_index].name)
+				break
+	if MobileInput.consume_weapon_prev():
 		weapon_index = (weapon_index - 1 + weapons.size()) % weapons.size()
 		weapon_changed.emit(weapons[weapon_index].name)
-	if Input.is_action_just_pressed("ui_page_down"):
+	if MobileInput.consume_weapon_next():
 		weapon_index = (weapon_index + 1) % weapons.size()
 		weapon_changed.emit(weapons[weapon_index].name)
-	if Input.is_action_pressed("shoot") and shoot_cooldown <= 0.0:
+	if MobileInput.is_shooting() and shoot_cooldown <= 0.0:
 		_fire_weapon()
 
 func _fire_weapon() -> void:

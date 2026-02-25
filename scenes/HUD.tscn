@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://hud001"]
+[gd_scene load_steps=3 format=3 uid="uid://hud001"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://mobilecontrols001" path="res://scenes/MobileControls.tscn" id="2"]
 
 [node name="HUD" type="CanvasLayer"]
 layer = 10
@@ -72,3 +73,6 @@ offset_top = 110.0
 offset_right = 260.0
 offset_bottom = 140.0
 text = "RESTART"
+
+[node name="MobileControls" parent="." instance=ExtResource("2")]
+visible = false

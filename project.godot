@@ -12,6 +12,10 @@ config_version=5
 
 compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
+[autoload]
+
+MobileInput="*res://scripts/mobile_input.gd"
+
 [application]
 
 config/name="NoitaLieroSoldat"

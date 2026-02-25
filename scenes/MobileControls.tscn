@@ -1,0 +1,128 @@
+[gd_scene load_steps=2 format=3 uid="uid://mobilecontrols001"]
+
+[ext_resource type="Script" path="res://scripts/mobile_controls.gd" id="1"]
+
+[node name="MobileControls" type="Control"]
+script = ExtResource("1")
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="LeftJoystick" type="Control" parent="."]
+offset_left = 40.0
+offset_top = 530.0
+offset_right = 180.0
+offset_bottom = 670.0
+mouse_filter = 2
+
+[node name="Knob" type="Control" parent="LeftJoystick"]
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 90.0
+offset_bottom = 90.0
+mouse_filter = 2
+
+[node name="KnobCircle" type="ColorRect" parent="LeftJoystick/Knob"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(1.0, 1.0, 1.0, 0.55)
+mouse_filter = 2
+
+[node name="JumpButton" type="Control" parent="."]
+offset_left = 10.0
+offset_top = 490.0
+offset_right = 100.0
+offset_bottom = 580.0
+mouse_filter = 2
+
+[node name="JumpBG" type="ColorRect" parent="JumpButton"]
+offset_right = 90.0
+offset_bottom = 90.0
+color = Color(0.3, 0.8, 0.3, 0.55)
+mouse_filter = 2
+
+[node name="JumpLabel" type="Label" parent="JumpButton"]
+offset_left = 5.0
+offset_top = 25.0
+offset_right = 85.0
+offset_bottom = 65.0
+text = "JUMP"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1.0, 1.0, 1.0, 0.9)
+
+[node name="RopeButton" type="Control" parent="."]
+offset_left = 1150.0
+offset_top = 490.0
+offset_right = 1240.0
+offset_bottom = 580.0
+mouse_filter = 2
+
+[node name="RopeBG" type="ColorRect" parent="RopeButton"]
+offset_right = 90.0
+offset_bottom = 90.0
+color = Color(0.8, 0.7, 0.2, 0.55)
+mouse_filter = 2
+
+[node name="RopeLabel" type="Label" parent="RopeButton"]
+offset_left = 5.0
+offset_top = 25.0
+offset_right = 85.0
+offset_bottom = 65.0
+text = "ROPE"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1.0, 1.0, 1.0, 0.9)
+
+[node name="WeaponPrev" type="Control" parent="."]
+offset_left = 660.0
+offset_top = 620.0
+offset_right = 730.0
+offset_bottom = 690.0
+mouse_filter = 2
+
+[node name="WPrevBG" type="ColorRect" parent="WeaponPrev"]
+offset_right = 70.0
+offset_bottom = 70.0
+color = Color(0.5, 0.5, 0.8, 0.55)
+mouse_filter = 2
+
+[node name="WPrevLabel" type="Label" parent="WeaponPrev"]
+offset_left = 5.0
+offset_top = 18.0
+offset_right = 65.0
+offset_bottom = 52.0
+text = "◄"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1.0, 1.0, 1.0, 0.9)
+
+[node name="WeaponNext" type="Control" parent="."]
+offset_left = 740.0
+offset_top = 620.0
+offset_right = 810.0
+offset_bottom = 690.0
+mouse_filter = 2
+
+[node name="WNextBG" type="ColorRect" parent="WeaponNext"]
+offset_right = 70.0
+offset_bottom = 70.0
+color = Color(0.5, 0.5, 0.8, 0.55)
+mouse_filter = 2
+
+[node name="WNextLabel" type="Label" parent="WeaponNext"]
+offset_left = 5.0
+offset_top = 18.0
+offset_right = 65.0
+offset_bottom = 52.0
+text = "►"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1.0, 1.0, 1.0, 0.9)
+
+[node name="AimHint" type="Label" parent="."]
+offset_left = 700.0
+offset_top = 600.0
+offset_right = 1150.0
+offset_bottom = 625.0
+text = "← Touch to Aim & Fire →"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1.0, 1.0, 1.0, 0.25)

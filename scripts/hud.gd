@@ -9,14 +9,20 @@ extends CanvasLayer
 @onready var game_over_panel: Panel = $GameOverPanel
 @onready var game_over_label: RichTextLabel = $GameOverPanel/GameOverLabel
 @onready var restart_button: Button = $GameOverPanel/RestartButton
+@onready var mobile_controls: Control = $MobileControls
 
 var hint_timer: float = 4.0
 
 func _ready() -> void:
 	layer = 10
-	controls_hint.visible = true
 	game_over_panel.visible = false
 	restart_button.pressed.connect(_on_restart)
+	mobile_controls.visible = MobileInput.is_mobile
+	if MobileInput.is_mobile:
+		controls_hint.text = "Touch right side to Aim & Fire  |  Drag left to Move  |  JUMP / ROPE buttons"
+		controls_hint.visible = true
+	else:
+		controls_hint.visible = true
 
 func _process(delta: float) -> void:
 	if hint_timer > 0.0:
