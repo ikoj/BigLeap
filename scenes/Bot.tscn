@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://bot001"]
+
+[ext_resource type="Script" path="res://scripts/bot.gd" id="1"]
+
+[node name="Bot" type="Node2D"]
+script = ExtResource("1")
+
+[node name="BodyPolygon" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-7, -14, 7, -14, 7, 10, -7, 10)
+color = Color(1.0, 0.2, 0.2, 1.0)
+
+[node name="HeadNode" type="Node2D" parent="."]
+position = Vector2(0, -18)
+
+[node name="HeadCircle" type="Polygon2D" parent="HeadNode"]
+polygon = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
+color = Color(0.9, 0.2, 0.2, 1.0)
+
+[node name="EyeLeft" type="Polygon2D" parent="HeadNode"]
+position = Vector2(-2, -1)
+polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
+color = Color(1.0, 1.0, 0.0, 1.0)
+
+[node name="EyeRight" type="Polygon2D" parent="HeadNode"]
+position = Vector2(2, -1)
+polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
+color = Color(1.0, 1.0, 0.0, 1.0)
+
+[node name="GunPivot" type="Node2D" parent="."]
+position = Vector2(0, -6)
+
+[node name="GunSprite" type="Polygon2D" parent="GunPivot"]
+position = Vector2(10, 0)
+polygon = PackedVector2Array(-10, -2, 10, -2, 10, 2, -10, 2)
+color = Color(0.5, 0.5, 0.5, 1.0)

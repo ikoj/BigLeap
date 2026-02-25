@@ -1,0 +1,16 @@
+# Godot editor/cache files
+.godot/
+
+# Export output folders
+web/
+ios/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Import metadata (can be regenerated)
+*.import
+
+# Script UID files (can be regenerated)
+*.uid
