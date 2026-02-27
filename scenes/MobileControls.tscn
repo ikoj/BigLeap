@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://mobilecontrols001"]
+[gd_scene format=3 uid="uid://bevj32v3me0h5"]
 
 [ext_resource type="Script" path="res://scripts/mobile_controls.gd" id="1"]
 
@@ -52,27 +52,6 @@ text = "JUMP"
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(1.0, 1.0, 1.0, 0.9)
 
-[node name="RopeButton" type="Control" parent="."]
-offset_left = 1150.0
-offset_top = 490.0
-offset_right = 1240.0
-offset_bottom = 580.0
-mouse_filter = 2
-
-[node name="RopeBG" type="ColorRect" parent="RopeButton"]
-offset_right = 90.0
-offset_bottom = 90.0
-color = Color(0.8, 0.7, 0.2, 0.55)
-mouse_filter = 2
-
-[node name="RopeLabel" type="Label" parent="RopeButton"]
-offset_left = 5.0
-offset_top = 25.0
-offset_right = 85.0
-offset_bottom = 65.0
-text = "ROPE"
-horizontal_alignment = 1
-theme_override_colors/font_color = Color(1.0, 1.0, 1.0, 0.9)
 
 [node name="WeaponPrev" type="Control" parent="."]
 offset_left = 660.0

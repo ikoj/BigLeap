@@ -5,7 +5,6 @@ var joy_idx: int = -1
 var joy_origin: Vector2 = Vector2.ZERO
 var aim_idx: int = -1
 var jump_idx: int = -1
-var rope_idx: int = -1
 var wprev_idx: int = -1
 var wnext_idx: int = -1
 
@@ -14,14 +13,12 @@ const JOY_RADIUS := 70.0
 const JOY_DEAD := 10.0
 
 const JUMP_RECT  := Rect2(10,  490, 90, 90)
-const ROPE_RECT  := Rect2(1150, 490, 90, 90)
 const WPREV_RECT := Rect2(660, 620, 70, 70)
 const WNEXT_RECT := Rect2(740, 620, 70, 70)
 const AIM_MIN_X  := 700.0
 
 @onready var joy_knob: Control = $LeftJoystick/Knob
 @onready var jump_btn: Control = $JumpButton
-@onready var rope_btn: Control = $RopeButton
 @onready var wprev_btn: Control = $WeaponPrev
 @onready var wnext_btn: Control = $WeaponNext
 @onready var joy_base: Control = $LeftJoystick
@@ -54,11 +51,6 @@ func _assign_touch(idx: int, pos: Vector2) -> void:
 		MobileInput.set_jump_just()
 		_highlight(jump_btn, true)
 		return
-	if rope_idx == -1 and ROPE_RECT.has_point(pos):
-		rope_idx = idx
-		MobileInput.set_rope_just()
-		_highlight(rope_btn, true)
-		return
 	if wprev_idx == -1 and WPREV_RECT.has_point(pos):
 		wprev_idx = idx
 		MobileInput.set_weapon_prev()
@@ -90,9 +82,6 @@ func _release_touch(idx: int) -> void:
 		aim_idx = -1
 		MobileInput.shooting = false
 		MobileInput.aim_active = false
-	elif idx == rope_idx:
-		rope_idx = -1
-		_highlight(rope_btn, false)
 	elif idx == wprev_idx:
 		wprev_idx = -1
 		_highlight(wprev_btn, false)

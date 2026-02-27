@@ -12,11 +12,9 @@ var health: float
 var fuel: float
 var weapon_index: int = 0
 var weapons: Array = []
-var rope_active: bool = false
 var is_dead: bool = false
 var shoot_cooldown: float = 0.0
 var terrain_ref: Node = null
-var rope_node: Rope = null
 var kills: int = 0
 var velocity: Vector2 = Vector2.ZERO
 var on_floor: bool = false
@@ -41,8 +39,6 @@ func _ready() -> void:
 	health = max_health
 	fuel = max_fuel
 	weapons = WeaponData.all_weapons()
-	rope_node = Rope.new()
-	get_parent().add_child(rope_node)
 	add_to_group("characters")
 
 func _process(delta: float) -> void:
@@ -58,7 +54,6 @@ func _physics_process(delta: float) -> void:
 	shoot_cooldown = max(0.0, shoot_cooldown - delta)
 	_handle_input(delta)
 	_apply_physics(delta)
-	_handle_rope_input()
 	_handle_shoot()
 
 func _handle_input(delta: float) -> void:
@@ -148,31 +143,6 @@ func _handle_jet_particles() -> void:
 		return
 	jet_particles.visible = (not on_floor) and MobileInput.is_jump_held() and fuel > 0.0
 
-func _handle_rope_input() -> void:
-	if MobileInput.consume_rope_just():
-		if rope_active:
-			_detach_rope()
-		else:
-			_try_cast_rope()
-
-func _try_cast_rope() -> void:
-	if terrain_ref == null:
-		return
-	var aim_pos = MobileInput.get_aim_world_pos(get_viewport())
-	var dir = (aim_pos - global_position).normalized()
-	var step = float(Terrain.TILE_PX)
-	for i in range(1, 26):
-		var check_pos = global_position + dir * step * i
-		var t = terrain_ref.tile_at(check_pos)
-		if t == Terrain.STONE or t == Terrain.DIRT:
-			rope_active = true
-			rope_node.attach(check_pos, self)
-			return
-
-func _detach_rope() -> void:
-	rope_active = false
-	rope_node.detach()
-	velocity *= 1.2
 
 func _handle_shoot() -> void:
 	if not MobileInput.is_mobile:
@@ -235,8 +205,6 @@ func die() -> void:
 		return
 	is_dead = true
 	visible = false
-	if rope_active:
-		_detach_rope()
 	_spawn_limbs()
 	player_died.emit()
 

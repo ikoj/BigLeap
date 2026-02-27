@@ -12,10 +12,6 @@ config_version=5
 
 compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
-[autoload]
-
-MobileInput="*res://scripts/mobile_input.gd"
-
 [application]
 
 config/name="NoitaLieroSoldat"
@@ -23,6 +19,10 @@ config/description="A fusion of Noita, Liero, and Soldat"
 run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+MobileInput="*res://scripts/mobile_input.gd"
 
 [display]
 
@@ -36,11 +36,6 @@ window/stretch/aspect="expand"
 shoot={
 "deadzone": 0.5,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
-]
-}
-rope={
-"deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":81,"physical_keycode":81,"key_label":0,"unicode":113,"location":0,"echo":false,"script":null)
 ]
 }
 

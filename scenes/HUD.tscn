@@ -48,7 +48,7 @@ offset_left = 0.0
 offset_top = 640.0
 offset_right = 1280.0
 offset_bottom = 665.0
-text = "WASD Move  SPACE Jetboots  Q Rope  1-5 Weapons  LMB Shoot"
+text = "WASD Move  SPACE Jetboots  1-5 Weapons  LMB Shoot"
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 0.8)
 
