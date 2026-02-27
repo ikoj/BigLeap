@@ -124,5 +124,3 @@ func _draw() -> void:
 	# Joystick base
 	draw_circle(JOY_CENTER, JOY_RADIUS, Color(1, 1, 1, 0.12))
 	draw_arc(JOY_CENTER, JOY_RADIUS, 0, TAU, 40, Color(1, 1, 1, 0.3), 2.0)
-	# Aim zone subtle indicator
-	draw_line(Vector2(AIM_MIN_X, 0), Vector2(AIM_MIN_X, size.y), Color(1, 1, 1, 0.07), 1.0)
